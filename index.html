@@ -44,8 +44,27 @@
         <h1>hahahah</h1>
         <h3>fsefsefesf</h3>
         <p>fsefesfefesfesf</p>
-        <img src="avatar.jpg" id="test">
-        <p>fsefesfsefsef</p>
+        <img src="avatar.jpg" id="test"> hi hih ih i
+        <p>fsefsef</p>
+         <p>fsefsef</p>
+          <p>fsefsef</p>
+           <p>fsefsef</p>
+            <p>fsefsef</p>
+             <p>fsefsef</p>
+              <p>fsefsef</p>
+               <p>fsefsef</p>
+                <p>fsefsef</p>
+                 <p>fsefsef</p>
+                  <p>fsefsef</p>
+                   <p>fsefsef</p>
+                    <p>fsefsef</p>
+                     <p>fsefsef</p>
+                      <p>fsefsef</p>
+                       <p>fsefsef</p>
+                        <p>fsefsef</p>
+                         <p>fsefsef</p>
+
+
         <div id="overlay">
             <div class="inner"></div>
             <div class="wrapper"></div>
@@ -58,16 +77,21 @@
                 th = 300,
                 shown = false,
                 parent = null,
-                placeholder = null
+                placeholder = null,
+                lock = false
 
             d.addEventListener('click', function () {
+                if (lock) return
                 if (!shown) {
                     shown = true
 
-                    var p = d.getBoundingClientRect()
+                    var p = d.getBoundingClientRect(),
+                        scale = Math.min(tw / p.width, th / p.height),
+                        dx = (window.innerWidth - p.width) / 2 - p.left,
+                        dy = (window.innerHeight - p.height) / 2 - p.top
 
                     parent = d.parentNode
-                    placeholder = document.createElement(d.tagName)
+                    placeholder = document.createElement('div')
                     copyStyles(d)
                     placeholder.style.visibility = 'hidden'
                     if (d.nextSibling) {
@@ -77,29 +101,39 @@
                     }
 
                     wrapper.appendChild(d)
+
                     d.style.position = 'absolute'
                     d.style.top = '0px'
                     d.style.left = '0px'
                     d.style.marginTop = -p.height / 2 + 'px'
                     d.style.marginLeft = -p.width / 2 + 'px'
-                    d.style.transition = '-webkit-transform .25s ease-out'
 
-                    var scale = Math.min(tw / p.width, th / p.height),
-                        dx = (window.innerWidth - p.width) / 2 - p.left,
-                        dy = (window.innerHeight - p.height) / 2 - p.top
+                    d.style.transition = 'all .25s ease-out'
 
-                    d.style.webkitTransform = 'translate(' + (-dx) + 'px, ' + (-dy) + 'px)'
+                    d.style.webkitTransform =
+                    d.style.mozTransform =
+                    d.style.transform =
+                        'translate(' + (-dx) + 'px, ' + (-dy) + 'px)'
+
                     overlay.style.display = 'block'
 
-                    setTimeout(function () {
-                        overlay.classList.add('show')
-                        d.style.webkitTransform =  'scale(' + scale + ')'
-                    }, 0)
+                    var force = d.offsetHeight
+
+                    overlay.classList.add('show')
+                    d.style.webkitTransform =
+                    d.style.mozTransform =
+                    d.style.transform =
+                        'scale(' + scale + ')'
+
                 } else {
+                    lock = true
                     var p = placeholder.getBoundingClientRect(),
                         dx = (window.innerWidth - p.width) / 2 - p.left,
                         dy = (window.innerHeight - p.height) / 2 - p.top
-                    d.style.webkitTransform = 'translate(' + (-dx) + 'px, ' + (-dy) + 'px)'
+                    d.style.webkitTransform =
+                    d.style.mozTransform =
+                    d.style.transform =
+                        'translate(' + (-dx) + 'px, ' + (-dy) + 'px)'
                     overlay.classList.remove('show')
                     setTimeout(function () {
                         d.style.position = ''
@@ -108,17 +142,21 @@
                         d.style.marginTop = ''
                         d.style.marginLeft = ''
                         d.style.transition = ''
-                        d.style.webkitTransform = ''
+                        d.style.webkitTransform =
+                        d.style.mozTransform =
+                        d.style.transform =
+                            ''
                         parent.insertBefore(d, placeholder)
                         parent.removeChild(placeholder)
                         overlay.style.display = ''
+                        lock = false
                     }, 250)
                     shown = false
                 }
             })
             
             var stylesToCopy = [
-                'display', 'position', 'width', 'height', 'top', 'left', 'right', 'bottom',
+                'position', 'width', 'height', 'top', 'left', 'right', 'bottom',
                 'float', 'padding', 'margin', 'border'
             ]
             function copyStyles (el) {
@@ -126,6 +164,8 @@
                 stylesToCopy.forEach(function (key) {
                     placeholder.style[key] = styles[key]
                 })
+                placeholder.style.display = styles.display === 'inline'
+                    ? 'inline-block' : 'block'
                 placeholder.style.borderColor = 'transparent'
             }
 
