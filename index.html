@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <style type="text/css">
+        body {
+            background-color: #ccc;
+        }
+        #test {
+            border-radius: 100%;
+        }
+        #overlay {
+            position: fixed;
+            display: none;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+        #overlay .inner {
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            transition: opacity .25s linear;
+            opacity: 0;
+        }
+        #overlay .wrapper {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+        }
+        #overlay.show .inner {
+            opacity: 1;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>hahahah</h1>
+        <h3>fsefsefesf</h3>
+        <p>fsefesfefesfesf</p>
+        <img src="avatar.jpg" id="test">
+        <p>fsefesfsefsef</p>
+        <div id="overlay">
+            <div class="inner"></div>
+            <div class="wrapper"></div>
+        </div>
+        <script>
+            var overlay = document.getElementById('overlay'),
+                wrapper = overlay.querySelector('.wrapper'),
+                d = document.getElementById('test'),
+                tw = 300,
+                th = 300,
+                shown = false,
+                parent = null,
+                placeholder = null
+
+            d.addEventListener('click', function () {
+                if (!shown) {
+                    shown = true
+
+                    var p = d.getBoundingClientRect()
+
+                    parent = d.parentNode
+                    placeholder = document.createElement(d.tagName)
+                    copyStyles(d)
+                    placeholder.style.visibility = 'hidden'
+                    if (d.nextSibling) {
+                        parent.insertBefore(placeholder, d.nextSibling)
+                    } else {
+                        parent.appendChild(placeholder)
+                    }
+
+                    wrapper.appendChild(d)
+                    d.style.position = 'absolute'
+                    d.style.top = '0px'
+                    d.style.left = '0px'
+                    d.style.marginTop = -p.height / 2 + 'px'
+                    d.style.marginLeft = -p.width / 2 + 'px'
+                    d.style.transition = '-webkit-transform .25s ease-out'
+
+                    var scale = Math.min(tw / p.width, th / p.height),
+                        dx = (window.innerWidth - p.width) / 2 - p.left,
+                        dy = (window.innerHeight - p.height) / 2 - p.top
+
+                    d.style.webkitTransform = 'translate(' + (-dx) + 'px, ' + (-dy) + 'px)'
+                    overlay.style.display = 'block'
+
+                    setTimeout(function () {
+                        overlay.classList.add('show')
+                        d.style.webkitTransform =  'scale(' + scale + ')'
+                    }, 0)
+                } else {
+                    var p = placeholder.getBoundingClientRect(),
+                        dx = (window.innerWidth - p.width) / 2 - p.left,
+                        dy = (window.innerHeight - p.height) / 2 - p.top
+                    d.style.webkitTransform = 'translate(' + (-dx) + 'px, ' + (-dy) + 'px)'
+                    overlay.classList.remove('show')
+                    setTimeout(function () {
+                        d.style.position = ''
+                        d.style.top = ''
+                        d.style.left = ''
+                        d.style.marginTop = ''
+                        d.style.marginLeft = ''
+                        d.style.transition = ''
+                        d.style.webkitTransform = ''
+                        parent.insertBefore(d, placeholder)
+                        parent.removeChild(placeholder)
+                        overlay.style.display = ''
+                    }, 250)
+                    shown = false
+                }
+            })
+            
+            var stylesToCopy = [
+                'display', 'position', 'width', 'height', 'top', 'left', 'right', 'bottom',
+                'float', 'padding', 'margin', 'border'
+            ]
+            function copyStyles (el) {
+                var styles = getComputedStyle(el)
+                stylesToCopy.forEach(function (key) {
+                    placeholder.style[key] = styles[key]
+                })
+                placeholder.style.borderColor = 'transparent'
+            }
+
+        </script>
+    </body>
+</html>
