@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <style type="text/css">
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-srif;
+            padding: 0 30px;
+        }
+        .test {
+            border-radius: 100%;
+        }
+        </style>
+    </head>
+    <body>
+        <h1><span class="test">Zoomer.js</span></h1>
+        <p>some inline text <img src="test.jpg" class="test"> some inline text</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom <img src="test.jpg" class="test"> zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom <span class="test" style="display:inline-block; line-height:30px; font-size: 20px; color: #f00">Even this inline text</span> zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <p>zoom zoom</p>
+        <script src="zoomer.js"></script>
+        <script>
+            Zoomer
+                .config({
+                    maxHeight: 400,
+                    maxWidth: 400,
+                    bgColor: '#000',
+                    bgOpacity: .85
+                })
+                .listen('.test')
+        </script>
+    </body>
+</html>
