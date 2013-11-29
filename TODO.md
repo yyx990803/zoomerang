@@ -1,0 +1,2 @@
+- moving the element into a new parent breaks CSS inheritance... the whole idea fails!!!
+- ok strategy change: inject the layer and manipulate the original target directly
