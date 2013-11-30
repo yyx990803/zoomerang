@@ -1,0 +1,20 @@
+{
+  "name": "zoomerang",
+  "version": "0.0.1",
+  "description": "drop-in zoomer for anything",
+  "main": "zoomerang.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yyx990803/zoomerang.git"
+  },
+  "keywords": [
+    "browser",
+    "zoom"
+  ],
+  "author": "Evan You",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yyx990803/zoomerang/issues"
+  },
+  "homepage": "https://github.com/yyx990803/zoomerang"
+}

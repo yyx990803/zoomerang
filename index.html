@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+        body {
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-srif;
+            padding: 0 30px;
+            width: 800px;
+            margin: 0 auto;
+            font-size: 24px;
+            color: #fff;
+            background-color: #f66;
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+        a:hover {
+            border-bottom: 4px solid #fff;
+        }
+        .zoom {
+            cursor: pointer;
+        }
+        img.zoom {
+            border-radius: 100%;
+        }
+        .avatar {
+            vertical-align: top;
+            width: 36px;
+            height: 36px;
+            margin-right: 6px;
+        }
+        #footer {
+            text-align: center;
+            margin: 40px 0;
+            line-height: 36px;
+        }
+        </style>
+    </head>
+    <body>
+        <h1><span class="zoom">Zoomerang.js</span></h1>
+        <div>is a drop-in library that allows your users to zoom in on (almost) any element on your page.</div>
+        <p><img src="test.jpg" class="zoom"> &lt;- click me</p>
+        <p><span class="zoom">And</span></p>
+        <p><span class="zoom">it</span></p>
+        <p><span class="zoom">works</span></p>
+        <p><span class="zoom">even</span></p>
+        <p><span class="zoom">if</span></p>
+        <p><span class="zoom">you</span></p>
+        <p><span class="zoom">resize</span></p>
+        <p><span class="zoom">or</span></p>
+        <p><span class="zoom">scroll</span></p>
+        <p><span class="zoom">your</span></p>
+        <p><span class="zoom">page.</span></p>
+        <p><img src="test.jpg" class="zoom"></p>
+        <div id="footer">
+            <img class="avatar zoom" src="https://1.gravatar.com/avatar/eca93da2c67aadafe35d477aa8f454b8?s=440"> By <a href="http://evanyou.me" taget="_blank">Evan You</a>
+        </div>
+        <script src="zoomerang.js"></script>
+        <script>
+            Array.prototype.forEach.call(document.querySelectorAll('p'), function (p, i) {
+                p.style.marginLeft = i * 40 + 'px'
+            })
+            Zoomerang
+                .config({
+                    maxHeight: 400,
+                    maxWidth: 400,
+                    bgColor: '#000',
+                    bgOpacity: .85
+                })
+                .listen('.zoom')
+        </script>
+    </body>
+</html>

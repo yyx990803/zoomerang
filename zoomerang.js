@@ -21,11 +21,12 @@
         maxHeight: 300
     }
 
-    // transition property
+    // compatibility stuff
     var trans = sniffTransition(),
         transitionProp = trans.transition,
-        transformProp  = trans.transform,
-        transEndEvent  = trans.transEnd
+        transformProp = trans.transform,
+        transEndEvent = trans.transEnd,
+        hasTouch = 'ontouchstart' in window
 
     setStyle(overlay, {
         position: 'fixed',
@@ -202,6 +203,7 @@
                 parent.insertBefore(target, placeholder)
                 parent.removeChild(placeholder)
                 overlay.style.display = 'none'
+                placeholder = null
                 shown = false
                 lock = false
             }
@@ -234,6 +236,6 @@
     } else if (typeof define == "function" && define.amd) {
         define(function(){ return api })
     } else {
-        this["Zoomer"] = api
+        this["Zoomerang"] = api
     }
 })()
