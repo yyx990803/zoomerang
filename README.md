@@ -12,7 +12,7 @@ Zoomerang.listen('#my-image')
 
 Now when you click on `#my-image`, it will... of course, zoom in. When you click again, it will zoom back out to its original place. (get it?)
 
-This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect, with improvements (you can resize / scroll the page and it still works).
+This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect, with improvements (you can resize / scroll the page when it's zoomed in and it still works).
 
 ## Caveats
 
