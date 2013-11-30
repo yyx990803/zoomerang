@@ -3,17 +3,17 @@
     <head>
         <title>Zoomerang.js</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href='http://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
         <style type="text/css">
         body {
             font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-srif;
             padding: 0 30px;
-            width: 800px;
+            width: 80%;
             margin: 0 auto;
             font-size: 24px;
             color: #fff;
             background-color: #f66;
+            position: relative;
         }
         a {
             color: #fff;
@@ -48,7 +48,7 @@
     </head>
     <body>
         <h1><span class="zoom">Zoomerang.js</span> <a class="gh" href="https://github.com/yyx990803/zoomerang">GitHub</a></h1>
-        <div>is a drop-in library that allows your users to zoom in on (almost) any element on your page.</div>
+        <div>is a drop-in library that allows your users to zoom in on (almost) any element on your existing page. No setup, arbitrary styling.</div>
         <p><img src="test.jpg" class="zoom"> &lt;- click me</p>
         <p><span class="zoom">And</span></p>
         <p><span class="zoom">it</span></p>
@@ -68,7 +68,7 @@
         <script src="zoomerang.js"></script>
         <script>
             Array.prototype.forEach.call(document.querySelectorAll('p'), function (p, i) {
-                p.style.marginLeft = i * 40 + 'px'
+                p.style.marginLeft = i * 6 + '%'
             })
             Zoomerang
                 .config({
