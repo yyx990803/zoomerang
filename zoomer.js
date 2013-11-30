@@ -2,8 +2,6 @@ var Zoomer = (function () {
 
     // elements
     var overlay = makeDiv(),
-        wrapper = makeDiv(),
-        inner   = makeDiv(),
         target,
         parent,
         placeholder
@@ -32,37 +30,17 @@ var Zoomer = (function () {
     setStyle(overlay, {
         position: 'fixed',
         display: 'none',
-        zIndex: 99999,
+        zIndex: 99998,
         top: 0,
         left: 0,
         right: 0,
-        bottom: 0
-    })
-
-    setStyle(inner, {
-        position: 'absolute',
-        zIndex: 0,
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
+        bottom: 0,
         opacity: 0,
         backgroundColor: options.bgColor,
         transition: 'opacity ' +
             options.transitionDuration + ' ' +
             options.transitionTimingFunction
     })
-
-    setStyle(wrapper, {
-        position: 'absolute',
-        zIndex: 1,
-        top: '50%',
-        left: '50%'
-    })
-
-    overlay.appendChild(inner)
-    overlay.appendChild(wrapper)
-    document.body.appendChild(overlay)
 
     // helpers ----------------------------------------------------------------
 
@@ -154,12 +132,9 @@ var Zoomer = (function () {
             for (var key in opts) {
                 options[key] = opts[key]
             }
-            setStyle(inner, {
-                backgroundColor: options.bgColor,
-                transition: 'opacity ' +
-                    options.transitionDuration + ' ' +
-                    options.transitionTimingFunction
-            })
+            if (opts.bgColor) {
+                overlay.style.backgroundColor = opts.bgColor
+            }
             return this
         },
 
@@ -180,16 +155,12 @@ var Zoomer = (function () {
                 dy    = p.top - (window.innerHeight - p.height) / 2
 
             placeholder = copy(target, p)
-            if (target.nextSibling) {
-                parent.insertBefore(placeholder, target.nextSibling)
-            } else {
-                parent.appendChild(placeholder)
-            }
 
             originalStyles = setStyle(target, {
-                position: 'absolute',
-                top: 0,
-                left: 0,
+                position: 'fixed',
+                zIndex: 99999,
+                top: '50%',
+                left: '50%',
                 whiteSpace: 'nowrap',
                 marginTop: -p.height / 2 + 'px',
                 marginLeft: -p.width / 2 + 'px',
@@ -200,12 +171,13 @@ var Zoomer = (function () {
                     options.transitionTimingFunction
             }, true)
 
-            wrapper.appendChild(target)
+            parent.appendChild(overlay)
+            parent.insertBefore(placeholder, target)
             overlay.style.display = 'block'
 
             // force layout
             var force = target.offsetHeight
-            inner.style.opacity = options.bgOpacity
+            overlay.style.opacity = options.bgOpacity
             setStyle(target, {
                 transform: 'scale(' + scale + ')'
             })
@@ -214,6 +186,7 @@ var Zoomer = (function () {
 
         close: function () {
             if (!shown) return
+            console.log(123)
             lock = true
             var p  = placeholder.getBoundingClientRect(),
                 dx = p.left - (window.innerWidth - p.width) / 2,
@@ -221,7 +194,7 @@ var Zoomer = (function () {
             setStyle(target, {
                 transform: 'translate(' + dx + 'px, ' + dy + 'px)'
             })
-            inner.style.opacity = 0
+            overlay.style.opacity = 0
             target.addEventListener(transEndEvent, onEnd)
             function onEnd () {
                 target.removeEventListener(transEndEvent, onEnd)
@@ -244,8 +217,9 @@ var Zoomer = (function () {
                 }
                 return
             }
-            el.addEventListener('click', function () {
-                api.open(el)
+            el.addEventListener('click', function (e) {
+                e.stopPropagation()
+                shown ? api.close() : api.open(el)
             })
             return this
         }
