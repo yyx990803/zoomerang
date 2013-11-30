@@ -2,7 +2,7 @@
 
 Zoom in, zoom out on (almost) anything in your page.
 
-[Demo]()
+[Demo](http://yyx990803.github.io/zoomerang/)
 
 ## Basic Usage
 
