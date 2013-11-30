@@ -1,4 +1,4 @@
-var Zoomer = (function () {
+(function () {
 
     // elements
     var overlay = makeDiv(),
@@ -227,6 +227,13 @@ var Zoomer = (function () {
     }
 
     overlay.addEventListener('click', api.close)
-    return api
 
+    // umd expose
+    if (typeof exports == "object") {
+        module.exports = api
+    } else if (typeof define == "function" && define.amd) {
+        define(function(){ return api })
+    } else {
+        this["Zoomer"] = api
+    }
 })()
