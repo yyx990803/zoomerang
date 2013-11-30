@@ -22,29 +22,29 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
 
 ## API Reference
 
-#### Zoomerang.listen(selector | element)
+- #### Zoomerang.listen(selector | element)
 
-Attach click listeners to all matched elements. You can also directly pass in a single node to this method.
+  Attach click listeners to all matched elements. You can also directly pass in a single node to this method.
 
-#### Zoomerang.open(selector | element)
+- #### Zoomerang.open(selector | element)
 
-Zoom in on the matched element.
+  Zoom in on the matched element.
 
-#### Zoomerang.close()
+- #### Zoomerang.close()
 
-Zoom out if currently zoomed-in.
+  Zoom out if currently zoomed-in.
 
-#### Zoomerang.config(options)
+- #### Zoomerang.config(options)
 
-Available options (all options take valid CSS values):
+  Available options (all options take valid CSS values):
 
-- transitionDuration - default: '.4s'
-- transitionTimingFunction - default: 'cubic-bezier(.4,0,0,1)'
-- bgColor - default: '#fff'
-- bgOpacity - default: 1
-- maxWidth - max element width when zoomed-in. default: 300
-- maxHeight - max element height when zoomed-in. default: 300
-- deepCopy - whether to copy innerHTML. If target element has complicated inner structure you might need this to make it work. default: false
+    - transitionDuration - default: '.4s'
+    - transitionTimingFunction - default: 'cubic-bezier(.4,0,0,1)'
+    - bgColor - default: '#fff'
+    - bgOpacity - default: 1
+    - maxWidth - max element width when zoomed-in. default: 300
+    - maxHeight - max element height when zoomed-in. default: 300
+    - deepCopy - whether to copy innerHTML. If target element has complicated inner structure you might need this to make it work. default: false
 
 ## License
 
