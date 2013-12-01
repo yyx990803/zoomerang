@@ -19,6 +19,7 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
 - CSS Transform required. (basically, IE10+)
 - Works best on fixed size elements such as `display: block`, `display: inline-block` and `img` elements.
 - Avoid using it on long inline text that has natural line wraps.
+- When used on mobile, it's best to avoid auto font size adjustments (e.g. set scale fixed to 1).
 
 ## API Reference
 
