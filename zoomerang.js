@@ -1,7 +1,7 @@
 (function () {
 
     // elements
-    var overlay = makeDiv(),
+    var overlay = document.createElement('div'),
         target,
         parent,
         placeholder
@@ -25,8 +25,7 @@
     var trans = sniffTransition(),
         transitionProp = trans.transition,
         transformProp = trans.transform,
-        transEndEvent = trans.transEnd,
-        hasTouch = 'ontouchstart' in window
+        transEndEvent = trans.transEnd
 
     setStyle(overlay, {
         position: 'fixed',
@@ -44,10 +43,6 @@
     })
 
     // helpers ----------------------------------------------------------------
-
-    function makeDiv () {
-        return document.createElement('div')
-    }
 
     function setStyle (el, styles, remember) {
         checkTrans(styles)
@@ -97,9 +92,9 @@
     }
 
     var stylesToCopy = [
-        'position', 'float', 'margin', 'display',
+        'position', 'display', 'float', 'margin',
         'top', 'left', 'right', 'bottom',
-        'lineHeight', 'verticalAlign', 'font'
+        'font', 'lineHeight', 'verticalAlign'
     ]
 
     function copy (el, box) {
@@ -133,9 +128,12 @@
             for (var key in opts) {
                 options[key] = opts[key]
             }
-            if (opts.bgColor) {
-                overlay.style.backgroundColor = opts.bgColor
-            }
+            setStyle(overlay, {
+                backgroundColor: options.bgColor,
+                transition: 'opacity ' +
+                    options.transitionDuration + ' ' +
+                    options.transitionTimingFunction
+            })
             return this
         },
 
@@ -172,12 +170,15 @@
                     options.transitionTimingFunction
             }, true)
 
+            // insert overlay & placeholder
             parent.appendChild(overlay)
             parent.insertBefore(placeholder, target)
             overlay.style.display = 'block'
 
             // force layout
             var force = target.offsetHeight
+
+            // trigger transition
             overlay.style.opacity = options.bgOpacity
             setStyle(target, {
                 transform: 'scale(' + scale + ')'
@@ -186,16 +187,19 @@
         },
 
         close: function () {
+
             if (!shown) return
-            console.log(123)
             lock = true
+
             var p  = placeholder.getBoundingClientRect(),
                 dx = p.left - (window.innerWidth - p.width) / 2,
                 dy = p.top - (window.innerHeight - p.height) / 2
+
+            overlay.style.opacity = 0
             setStyle(target, {
                 transform: 'translate(' + dx + 'px, ' + dy + 'px)'
             })
-            overlay.style.opacity = 0
+            
             target.addEventListener(transEndEvent, onEnd)
             function onEnd () {
                 target.removeEventListener(transEndEvent, onEnd)
@@ -207,10 +211,12 @@
                 shown = false
                 lock = false
             }
+
             return this
         },
 
         listen: function listen (el) {
+
             if (typeof el === 'string') {
                 var els = document.querySelectorAll(el),
                     i = els.length
@@ -219,10 +225,12 @@
                 }
                 return
             }
+
             el.addEventListener('click', function (e) {
                 e.stopPropagation()
                 shown ? api.close() : api.open(el)
             })
+            
             return this
         }
 
