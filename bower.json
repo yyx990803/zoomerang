@@ -1,6 +1,6 @@
 {
   "name": "zoomerang",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "drop-in zoomer for anything",
   "main": "zoomerang.js",
   "ignore": [
