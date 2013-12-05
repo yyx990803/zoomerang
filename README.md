@@ -16,7 +16,7 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
 
 ## Installation
 
-Zoomerang.js is packaged with UMD so you can use it with most existing module systems. It's also registed as a Bower/NPM/Component package so you can use it with your preferred tools:
+Zoomerang.js is packaged with UMD so you can use it with most existing module systems. It's also registered as a Bower/NPM/Component package so you can use it with your preferred tools:
 
 ``` bash
 $ component install yyx990803/zoomerang
