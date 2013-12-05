@@ -230,7 +230,11 @@
 
             el.addEventListener('click', function (e) {
                 e.stopPropagation()
-                shown ? api.close() : api.open(el)
+                if (shown) {
+                    api.close()
+                } else {
+                    api.open(el)
+                }
             })
             
             return this
@@ -246,6 +250,6 @@
     } else if (typeof define == "function" && define.amd) {
         define(function(){ return api })
     } else {
-        this["Zoomerang"] = api
+        this.Zoomerang = api
     }
 })()
