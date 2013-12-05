@@ -14,6 +14,18 @@ Now when you click on `#my-image`, it will... of course, zoom in. When you click
 
 This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect, with improvements (you can resize / scroll the page when it's zoomed in and it still works).
 
+## Installation
+
+Zoomerang.js is packaged with UMD so you can use it with most existing module systems. It's also registed as a Bower/NPM/Component package so you can use it with your preferred tools:
+
+``` bash
+$ component install yyx990803/zoomerang
+# or
+$ bower install zoomerang
+# or
+$ npm install zoomerang
+```
+
 ## Caveats
 
 - CSS Transform required. (basically, IE10+)
