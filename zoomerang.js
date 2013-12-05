@@ -25,6 +25,7 @@
     var trans = sniffTransition(),
         transitionProp = trans.transition,
         transformProp = trans.transform,
+        transformCssProp = transformProp.replace(/(.*)Transform/, '-$1-transform'),
         transEndEvent = trans.transEnd
 
     setStyle(overlay, {
@@ -164,10 +165,7 @@
                 marginTop: -p.height / 2 + 'px',
                 marginLeft: -p.width / 2 + 'px',
                 transform: 'translate(' + dx + 'px, ' + dy + 'px)',
-                transition:
-                    transformProp.replace(/(.*)Transform/, '-$1-transform') + ' ' +
-                    options.transitionDuration + ' ' +
-                    options.transitionTimingFunction
+                transition: ''
             }, true)
 
             // insert overlay & placeholder
@@ -181,6 +179,10 @@
             // trigger transition
             overlay.style.opacity = options.bgOpacity
             setStyle(target, {
+                transition:
+                    transformCssProp + ' ' +
+                    options.transitionDuration + ' ' +
+                    options.transitionTimingFunction,
                 transform: 'scale(' + scale + ')'
             })
             return this
