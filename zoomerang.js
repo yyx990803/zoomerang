@@ -2,6 +2,7 @@
 
     // elements
     var overlay = document.createElement('div'),
+        wrapper = document.createElement('div'),
         target,
         parent,
         placeholder
@@ -41,6 +42,15 @@
         transition: 'opacity ' +
             options.transitionDuration + ' ' +
             options.transitionTimingFunction
+    })
+
+    setStyle(wrapper, {
+        position: 'fixed',
+        zIndex: 99999,
+        top: '50%',
+        left: '50%',
+        width: 0,
+        height: 0
     })
 
     // helpers ----------------------------------------------------------------
@@ -157,10 +167,11 @@
             placeholder = copy(target, p)
 
             originalStyles = setStyle(target, {
-                position: 'fixed',
-                zIndex: 99999,
-                top: '50%',
-                left: '50%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: '',
+                bottom: '',
                 whiteSpace: 'nowrap',
                 marginTop: -p.height / 2 + 'px',
                 marginLeft: -p.width / 2 + 'px',
@@ -170,7 +181,9 @@
 
             // insert overlay & placeholder
             parent.appendChild(overlay)
+            parent.appendChild(wrapper)
             parent.insertBefore(placeholder, target)
+            wrapper.appendChild(target)
             overlay.style.display = 'block'
 
             // force layout

@@ -6,32 +6,23 @@ Zoom in, zoom out on (almost) anything in your page.
 
 ## Basic Usage
 
+Include with a script tag, or install with your package manager of choice (Bower/Component/npm).
+
 ``` js
 Zoomerang.listen('#my-image')
 ```
 
 Now when you click on `#my-image`, it will... of course, zoom in. When you click again, it will zoom back out to its original place. (get it?)
 
-This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect, with improvements (you can resize / scroll the page when it's zoomed in and it still works).
+This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect, with improvements (you can resize / scroll the page when it's zoomed in and it still works). Please note it depends on the way browsers handle CSS transforms and has limited compatibility.
 
-## Installation
-
-Zoomerang.js is packaged with UMD so you can use it with most existing module systems. It's also registered as a Bower/NPM/Component package so you can use it with your preferred tools:
-
-``` bash
-$ component install yyx990803/zoomerang
-# or
-$ bower install zoomerang
-# or
-$ npm install zoomerang
-```
-
-## Caveats
+## Caveats / Known Issues
 
 - CSS Transform required. (basically, IE10+)
 - Works best on fixed size elements such as `display: block`, `display: inline-block` and `img` elements.
 - Avoid using it on long inline text that has natural line wraps.
 - When used on mobile, it's best to avoid auto font size adjustments (e.g. set scale fixed to 1).
+- Elements with non-rectangular shape will have pixelated edge in Firefox.
 
 ## API Reference
 
