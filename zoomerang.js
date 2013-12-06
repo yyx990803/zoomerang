@@ -221,6 +221,8 @@
                 setStyle(target, originalStyles)
                 parent.insertBefore(target, placeholder)
                 parent.removeChild(placeholder)
+                parent.removeChild(overlay)
+                parent.removeChild(wrapper)
                 overlay.style.display = 'none'
                 placeholder = null
                 shown = false
