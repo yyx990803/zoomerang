@@ -179,6 +179,12 @@
                 transition: ''
             }, true)
 
+            // deal with % width and height
+            setStyle(wrapper, {
+                width: p.width + 'px',
+                height: p.height + 'px'
+            })
+
             // insert overlay & placeholder
             parent.appendChild(overlay)
             parent.appendChild(wrapper)
