@@ -78,8 +78,8 @@
             tform = ['transform', 'webkitTransform', 'mozTransform'],
             end   = {
                 'transition'       : 'transitionend',
-                'MozTransition'    : 'transitionend',
-                'WebkitTransition' : 'webkitTransitionEnd'
+                'mozTransition'    : 'transitionend',
+                'webkitTransition' : 'webkitTransitionEnd'
             }
         trans.some(function (prop) {
             if (overlay.style[prop] !== undefined) {
