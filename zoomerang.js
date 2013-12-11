@@ -1,3 +1,7 @@
+/*
+ * zoomerang.js - http://yyx990803.github.io/zoomerang/
+ */
+
 (function () {
 
     // elements
@@ -103,9 +107,10 @@
     }
 
     var stylesToCopy = [
-        'position', 'display', 'float', 'margin',
+        'position', 'display', 'float',
         'top', 'left', 'right', 'bottom',
-        'font', 'lineHeight', 'verticalAlign'
+        'marginBottom', 'marginLeft', 'marginRight',
+        'marginTop', 'font', 'lineHeight', 'verticalAlign'
     ]
 
     function copy (el, box) {
@@ -135,6 +140,7 @@
     var api = {
 
         config: function (opts) {
+
             if (!opts) return options
             for (var key in opts) {
                 options[key] = opts[key]
@@ -220,7 +226,7 @@
             setStyle(target, {
                 transform: 'translate(' + dx + 'px, ' + dy + 'px)'
             })
-            
+
             target.addEventListener(transEndEvent, onEnd)
             function onEnd () {
                 target.removeEventListener(transEndEvent, onEnd)
@@ -260,7 +266,6 @@
             
             return this
         }
-
     }
 
     overlay.addEventListener('click', api.close)
