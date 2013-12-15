@@ -23,6 +23,7 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
 - Avoid using it on long inline text that has natural line wraps.
 - When used on mobile, it's best to avoid auto font size adjustments (e.g. set scale fixed to 1).
 - Elements with non-rectangular shape will have pixelated edge in Firefox.
+- Doesn't work on stock Android 2.x browser.
 
 ## API Reference
 
