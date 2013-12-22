@@ -215,7 +215,7 @@
 
         close: function () {
 
-            if (!shown) return
+            if (!shown || lock) return
             lock = true
 
             var p  = placeholder.getBoundingClientRect(),
