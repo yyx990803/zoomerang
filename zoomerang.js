@@ -92,7 +92,7 @@
             if (overlay.style[prop] !== undefined) {
                 ret.transform = prop
                 return true
-            }  
+            }
         })
         return ret
     }
@@ -263,7 +263,7 @@
                     api.open(el)
                 }
             })
-            
+
             return this
         }
     }
@@ -278,4 +278,4 @@
     } else {
         this.Zoomerang = api
     }
-})()
+})();
