@@ -26,7 +26,9 @@
         bgColor: '#fff',
         bgOpacity: 1,
         maxWidth: 300,
-        maxHeight: 300
+        maxHeight: 300,
+        onOpen: null,
+        onClose: null
     }
 
     // compatibility stuff
@@ -157,15 +159,16 @@
             return this
         },
 
-        open: function (el) {
+        open: function (el, cb) {
 
-            if (lock || shown) return
+            if (shown || lock) return
 
             target = typeof el === 'string'
                 ? document.querySelector(el)
                 : el
 
             shown = true
+            lock = true
             parent = target.parentNode
 
             var p     = target.getBoundingClientRect(),
@@ -219,10 +222,20 @@
                     options.transitionTimingFunction,
                 transform: 'scale(' + scale + ')'
             })
+
+            target.addEventListener(transEndEvent, function onEnd () {
+                target.removeEventListener(transEndEvent, onEnd)
+                lock = false
+                cb = cb || options.onOpen
+                if (cb) cb(target)
+            })
+
+            
+
             return this
         },
 
-        close: function () {
+        close: function (cb) {
 
             if (!shown || lock) return
             lock = true
@@ -236,8 +249,7 @@
                 transform: 'translate(' + dx + 'px, ' + dy + 'px)'
             })
 
-            target.addEventListener(transEndEvent, onEnd)
-            function onEnd () {
+            target.addEventListener(transEndEvent, function onEnd () {
                 target.removeEventListener(transEndEvent, onEnd)
                 setStyle(target, originalStyles)
                 parent.insertBefore(target, placeholder)
@@ -248,7 +260,11 @@
                 placeholder = null
                 shown = false
                 lock = false
-            }
+                cb = typeof cb === 'function'
+                    ? cb
+                    : options.onClose
+                if (cb) cb(target)
+            })
 
             return this
         },

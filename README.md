@@ -31,13 +31,13 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
 
   Attach click listeners to all matched elements. You can also directly pass in a single node to this method.
 
-- #### Zoomerang.open(selector | element)
+- #### Zoomerang.open(selector | element, [callback])
 
-  Zoom in on the matched element.
+  Zoom in on the matched element. Fires optional callback when the transition is done.
 
-- #### Zoomerang.close()
+- #### Zoomerang.close([callback])
 
-  Zoom out if currently zoomed-in.
+  Zoom out if currently zoomed-in. Fires optional callback when the transition is done.
 
 - #### Zoomerang.config(options)
 
@@ -50,7 +50,11 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
     - `maxWidth` - max element width when zoomed-in. default: `300`
     - `maxHeight` - max element height when zoomed-in. default: `300`
     - `deepCopy` - whether to copy innerHTML. If target element has complicated inner structure you might need this to make it work. default: `false`
+    - `onOpen` - a callback function that will be called when a target is zoomed in and transition has ended. It will get the target element as the argument.
+    - `onClose` - same as `onOpen`, except fired when zoomed out.
 
 ## License
 
 MIT
+
+Brought to you by [@youyuxi](https://twitter.com/youyuxi).
