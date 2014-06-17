@@ -29,6 +29,7 @@
         maxHeight: 300,
         onOpen: null,
         onClose: null,
+        onBeforeClose: null,
         onBeforeOpen: null
     }
 
@@ -243,6 +244,9 @@
 
             if (!shown || lock) return
             lock = true
+
+            // onBeforeClose event
+            if (options.onBeforeClose) options.onBeforeClose(target)
 
             var p  = placeholder.getBoundingClientRect(),
                 dx = p.left - (window.innerWidth - p.width) / 2,
