@@ -28,7 +28,8 @@
         maxWidth: 300,
         maxHeight: 300,
         onOpen: null,
-        onClose: null
+        onClose: null,
+        onBeforeOpen: null
     }
 
     // compatibility stuff
@@ -166,6 +167,9 @@
             target = typeof el === 'string'
                 ? document.querySelector(el)
                 : el
+
+            // onBeforeOpen event
+            if (options.onBeforeOpen) options.onBeforeOpen(target)
 
             shown = true
             lock = true

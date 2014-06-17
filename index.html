@@ -78,6 +78,7 @@
                     bgOpacity: .85,
                     onOpen: openCallback,
                     onClose: closeCallback
+                    onBeforeOpen: beforeOpenCallback,
                 })
                 .listen('.zoom')
 
@@ -89,6 +90,11 @@
             function closeCallback (el) {
                 console.log('zoomed out on: ')
                 console.log(el)
+            }
+
+            function beforeOpenCallback (el) {
+            	console.log('on before zoomed in on:')
+            	console.log(el)
             }
         </script>
     </body>
