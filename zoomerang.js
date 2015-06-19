@@ -4,6 +4,9 @@
 
 (function () {
 
+    // webkit prefix helper
+    var prefix = 'WebkitAppearance' in document.documentElement.style ? '-webkit-' : ''
+
     // regex
     var percentageRE = /^([\d\.]+)%$/
 
@@ -48,6 +51,7 @@
         bottom: 0,
         opacity: 0,
         backgroundColor: options.bgColor,
+        cursor: prefix + 'zoom-out',
         transition: 'opacity ' +
             options.transitionDuration + ' ' +
             options.transitionTimingFunction
@@ -187,6 +191,7 @@
                 whiteSpace: 'nowrap',
                 marginTop: -p.height / 2 + 'px',
                 marginLeft: -p.width / 2 + 'px',
+                cursor: prefix + 'zoom-out',
                 transform: 'translate(' + dx + 'px, ' + dy + 'px)',
                 transition: ''
             }, true)
@@ -229,8 +234,6 @@
                 cb = cb || options.onOpen
                 if (cb) cb(target)
             })
-
-            
 
             return this
         },
@@ -279,6 +282,10 @@
                 }
                 return
             }
+
+            setStyle(el, {
+                cursor: prefix + 'zoom-in'
+            })
 
             el.addEventListener('click', function (e) {
                 e.stopPropagation()
