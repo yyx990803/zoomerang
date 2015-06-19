@@ -4,17 +4,8 @@
 
 (function () {
 
-    // Prefix helper
-    var prefix = (function () {
-        var styles = window.getComputedStyle(document.documentElement, ''),
-            pre = (Array.prototype.slice
-                .call(styles)
-                .join('')
-                .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-            )[1];
-
-        return '-' + pre + '-';
-    })();
+    // webkit prefix helper
+    var prefix = 'WebkitAppearance' in document.documentElement.style ? '-webkit-' : ''
 
     // regex
     var percentageRE = /^([\d\.]+)%$/
