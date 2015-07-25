@@ -52,7 +52,8 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
     - `deepCopy` - whether to copy innerHTML. If target element has complicated inner structure you might need this to make it work. default: `false`
     - `onOpen` - a callback function that will be called when a target is zoomed in and transition has ended. It will get the target element as the argument.
     - `onClose` - same as `onOpen`, except fired when zoomed out.
-
+    - `onBeforeOpen` - a callback function, that will be called before zoom-in.
+    - `onBeforeClose` - a callback function, that will be called before zoom-out.
 ## License
 
 MIT
