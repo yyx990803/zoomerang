@@ -75,9 +75,7 @@
         var s = el.style,
             original = {}
         for (var key in styles) {
-            if (remember) {
-                original[key] = s[key] || ''
-            }
+            if (remember) original[key] = s[key] || ''
             s[key] = styles[key]
         }
         return original
@@ -263,6 +261,7 @@
             target.addEventListener(transEndEvent, function onEnd () {
                 target.removeEventListener(transEndEvent, onEnd)
                 setStyle(target, originalStyles)
+                if (!originalStyles.transform) target.style.transform = null
                 parent.insertBefore(target, placeholder)
                 parent.removeChild(placeholder)
                 parent.removeChild(overlay)
