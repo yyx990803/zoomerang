@@ -109,11 +109,16 @@
     }
 
     function checkTrans (styles) {
+        var value
         if (styles.transition) {
-            styles[transitionProp] = styles.transition
+            value = styles.transition
+            delete styles.transition
+            styles[transitionProp] = value
         }
         if (styles.transform) {
-            styles[transformProp] = styles.transform
+            value = styles.transform
+            delete styles.transform
+            styles[transformProp] = value
         }
     }
 
