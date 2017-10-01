@@ -315,6 +315,9 @@
 
     overlay.addEventListener('click', api.close)
     wrapper.addEventListener('click', api.close)
+    window.addEventListener('keydown', function(e) {
+        if (e.keyCode === 27)   api.close()
+    })
 
     // umd expose
     if (typeof exports == "object") {
