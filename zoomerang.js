@@ -30,6 +30,7 @@
         bgOpacity: 1,
         maxWidth: 300,
         maxHeight: 300,
+        closeOnScroll: false,
         onOpen: null,
         onClose: null,
         onBeforeClose: null,
@@ -308,6 +309,10 @@
                     api.open(el)
                 }
             })
+
+            if (!shown && options.closeOnScroll) {
+                document.addEventListener('scroll', api.close)
+            }
 
             return this
         }
