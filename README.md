@@ -20,6 +20,7 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
 
 - CSS Transform required. (basically, IE10+)
 - Works best on fixed size elements such as `display: block`, `display: inline-block` and `img` elements.
+- When zooming out due to page scrolling, element jumps to its proper spot in the document after zooming out to its previous absolute position.
 - Avoid using it on long inline text that has natural line wraps.
 - When used on mobile, it's best to avoid auto font size adjustments (e.g. set scale fixed to 1).
 - Elements with non-rectangular shape will have pixelated edge in Firefox.
@@ -41,12 +42,13 @@ This is largely inspired by [Medium](http://medium.com)'s avatar zoom in effect,
 
 - #### Zoomerang.config(options)
 
-  Takes an options object. Available options (all options take valid CSS values):
+  Takes an options object. Available options (all style options take valid CSS values):
 
     - `transitionDuration` - default: `'.4s'`
     - `transitionTimingFunction` - default: `'cubic-bezier(.4,0,0,1)'`
     - `bgColor` - default: `'#fff'`
     - `bgOpacity` - default: `1`
+    - `closeOnScroll` - scrolling triggers zoom-out. default: `false`
     - `maxWidth` - max element width when zoomed-in. default: `300`
     - `maxHeight` - max element height when zoomed-in. default: `300`
     - `deepCopy` - whether to copy innerHTML. If target element has complicated inner structure you might need this to make it work. default: `false`
